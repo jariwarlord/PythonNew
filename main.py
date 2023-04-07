@@ -1,21 +1,10 @@
-import turtle as t
-import random
+import pandas
 
-tim = t.Turtle()
+data = pandas.read_csv("nato_phonetic_alphabet.csv")
+print(data.to_dict())
+phonetic_dict = {row.letter: row.code for (index, row) in data.iterrows()}
+print(phonetic_dict)
 
-t.colormode(255)
-
-
-tim.speed("fastest")
-
-def draw_spi(size_of_gap):
-    for _ in range(int(360/ size_of_gap)):
-        tim.circle(100)
-        tim.setheading(tim.heading() + size_of_gap)
-
-draw_spi(5)
-
-
-
-screen = t.Screen()
-screen.exitonclick()
+word = input("Enter a word: ").upper()
+output_list = [phonetic_dict for letter in word]
+print(output_list)
